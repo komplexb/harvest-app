@@ -18,37 +18,36 @@ export function DonationHouse({ currentAmount, goalAmount }: DonationHouseProps)
               <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,0,0,0.1)" strokeWidth="1"/>
             </pattern>
             <clipPath id="churchShape">
-              <path d="M128,58.1l-94.8,85.6h23.9v95.7h141.8v-95.7h23.9L128,58.1z" />
+              <path d="M227.2,138.8l-92.7-83.6V43.9h14.2c3.6,0,6.6-2.9,6.6-6.6c0-3.6-2.9-6.6-6.6-6.6h-14.2V16.6 c0-3.6-2.9-6.6-6.6-6.6c-3.6,0-6.6,2.9-6.6,6.6v14.2h-14.2c-3.6,0-6.6,2.9-6.6,6.6c0,3.6,2.9,6.6,6.6,6.6h14.2v11.3l-92.7,83.6 c-2.7,2.4-2.9,6.6-0.5,9.3c1.2,1.4,3,2.2,4.9,2.2h17.4v89.2c0,3.6,2.9,6.6,6.6,6.6h141.8c3.6,0,6.6-2.9,6.6-6.6v-89.2h17.4 c3.6,0,6.6-2.9,6.6-6.6C229.4,141.8,228.6,140.1,227.2,138.8L227.2,138.8z" />
             </clipPath>
           </defs>
 
           {/* Progress fill with grid */}
           <g clipPath="url(#churchShape)">
-            <g style={{
-              transform: `scaleY(${progress / 100})`,
-              transformOrigin: 'bottom'
-            }}>
-              <rect
-                x="0"
-                y="58"
-                width="256"
-                height="182"
-                fill="#b8d8df"
-                style={{
-                  transition: 'transform 1s ease-in-out'
-                }}
-              />
-              <rect
-                x="0"
-                y="58"
-                width="256"
-                height="182"
-                fill="url(#gridPattern)"
-                style={{
-                  transition: 'transform 1s ease-in-out'
-                }}
-              />
-            </g>
+            <rect
+              x="0"
+              y="0"
+              width="256"
+              height="256"
+              fill="#b8d8df"
+              style={{
+                transformOrigin: 'bottom',
+                transform: `scaleY(${progress / 100})`,
+                transition: 'transform 1s ease-in-out'
+              }}
+            />
+            <rect
+              x="0"
+              y="0"
+              width="256"
+              height="256"
+              fill="url(#gridPattern)"
+              style={{
+                transformOrigin: 'bottom',
+                transform: `scaleY(${progress / 100})`,
+                transition: 'transform 1s ease-in-out'
+              }}
+            />
           </g>
 
           {/* Door */}
