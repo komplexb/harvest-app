@@ -55,7 +55,11 @@ export function DonationControls({ onDonate, currentAmount, goalAmount }: Donati
           <button
             key={amount}
             onClick={() => onDonate(amount)}
-            className="brick-bg text-white font-bold py-2 px-4 rounded shadow-md hover:brightness-110 transition-all"
+            className="bg-red-700 text-white font-bold py-2 px-4 rounded shadow-md hover:brightness-110 transition-all"
+            style={{
+              backgroundImage: 'linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px)',
+              backgroundSize: '40px 20px'
+            }}
             disabled={currentAmount >= goalAmount}
           >
             ${amount.toLocaleString()}
