@@ -8,12 +8,12 @@ interface DonationControlsProps {
 
 export function DonationControls({ onDonate, currentAmount, goalAmount }: DonationControlsProps) {
   const [customAmount, setCustomAmount] = useState('');
-  
+
   const donationAmounts = [
     100000, 75000, 50000, 30000, 20000, 10000,
     8000, 5000, 3000, 1000
   ];
-  
+
   const progress = (currentAmount / goalAmount) * 100;
 
   const handleCustomDonation = () => {
@@ -43,7 +43,7 @@ export function DonationControls({ onDonate, currentAmount, goalAmount }: Donati
           <span>${goalAmount.toLocaleString()}</span>
         </div>
         <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-          <div 
+          <div
             className="h-full bg-[#f4a261] transition-all duration-1000"
             style={{ width: `${progress}%` }}
           />
@@ -55,9 +55,7 @@ export function DonationControls({ onDonate, currentAmount, goalAmount }: Donati
           <button
             key={amount}
             onClick={() => onDonate(amount)}
-            className="px-4 py-2 bg-[#4e665d] hover:bg-[#3d514a] 
-                     text-white font-semibold rounded-lg transition-colors
-                     disabled:opacity-50 disabled:cursor-not-allowed"
+            className="brick-bg text-white font-bold py-2 px-4 rounded shadow-md hover:brightness-110 transition-all"
             disabled={currentAmount >= goalAmount}
           >
             ${amount.toLocaleString()}
@@ -74,7 +72,7 @@ export function DonationControls({ onDonate, currentAmount, goalAmount }: Donati
             onChange={handleCustomAmountChange}
             onKeyPress={handleKeyPress}
             placeholder="Enter amount"
-            className="w-full px-8 py-2 border border-gray-300 rounded-lg focus:ring-2 
+            className="w-full px-8 py-2 border border-gray-300 rounded-lg focus:ring-2
                      focus:ring-[#4e665d] focus:border-transparent outline-none"
             disabled={currentAmount >= goalAmount}
           />
@@ -82,7 +80,7 @@ export function DonationControls({ onDonate, currentAmount, goalAmount }: Donati
         <button
           onClick={handleCustomDonation}
           disabled={!customAmount || currentAmount >= goalAmount}
-          className="px-4 py-2 bg-[#4e665d] hover:bg-[#3d514a] 
+          className="px-4 py-2 bg-[#4e665d] hover:bg-[#3d514a]
                    text-white font-semibold rounded-lg transition-colors
                    disabled:opacity-50 disabled:cursor-not-allowed"
         >

@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.brick-bg {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px),
+    linear-gradient(90deg,
+      rgba(0, 0, 0, 0.1) 1px,
+      transparent 1px);
+  background-size: 40px 20px;
+  background-color: #9b2c2c;
+}
