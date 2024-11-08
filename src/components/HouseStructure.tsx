@@ -10,25 +10,44 @@ interface HouseStructureProps {
 
 export function HouseStructure({ donations, onBrickClick }: HouseStructureProps) {
   const totalBricks = donations.reduce((sum, tier) => sum + tier.count, 0);
-  const bricks = Array.from({ length: totalBricks });
-  
+
   // Calculate dimensions
   const baseWidth = 10; // Number of bricks in base
-  const height = Math.ceil(totalBricks / baseWidth) + 4; // Add 4 rows for roof
-  const rows = Array.from({ length: height });
+  const wallHeight = Math.ceil(totalBricks / baseWidth);
+  const minWallHeight = 8;
+  const actualWallHeight = Math.max(wallHeight, minWallHeight);
+
+  // Calculate roof dimensions (from bottom to top)
+  const roofRows = [
+    { width: baseWidth, offset: 0 },   // Bottom row (10 bricks)
+    { width: 8, offset: 1 },           // Fourth row (8 bricks)
+    { width: 6, offset: 2 },           // Third row (6 bricks)
+    { width: 4, offset: 3 },           // Second row (4 bricks)
+    { width: 2, offset: 4 }            // Top row (2 bricks)
+  ];
+
+  // Calculate total roof bricks needed
+  const roofBricks = roofRows.reduce((sum, row) => sum + row.width, 0);
 
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center">
       {/* Cross */}
       <div className="text-gray-700 mb-2">
         <Cross size={32} />
       </div>
 
       {/* Roof */}
-      <div className="flex flex-col items-center">
-        {[4, 3, 2, 1].map((count, idx) => (
-          <div key={`roof-${idx}`} className="flex gap-1">
-            {Array.from({ length: count }).map((_, i) => (
+      <div className="flex flex-col items-center gap-1">
+        {roofRows.map(({ width, offset }, idx) => (
+          <div
+            key={`roof-${idx}`}
+            className="flex gap-1"
+            style={{
+              paddingLeft: `${offset * 0.95}rem`,
+              paddingRight: `${offset * 0.95}rem`
+            }}
+          >
+            {Array.from({ length: width }).map((_, i) => (
               <DonationBrick
                 key={`roof-${idx}-${i}`}
                 amount={donations[0].amount}
@@ -40,13 +59,14 @@ export function HouseStructure({ donations, onBrickClick }: HouseStructureProps)
       </div>
 
       {/* Walls */}
-      <div className="flex flex-col gap-1">
-        {rows.slice(0, height - 4).map((_, rowIndex) => (
+      <div className="flex flex-col gap-1 -mt-1">
+        {Array.from({ length: actualWallHeight }).map((_, rowIndex) => (
           <div key={`row-${rowIndex}`} className="flex gap-1">
             {Array.from({ length: baseWidth }).map((_, colIndex) => {
               const brickIndex = rowIndex * baseWidth + colIndex;
-              if (brickIndex >= totalBricks) return null;
-              
+              // Add roofBricks to account for the roof in the total count
+              if (brickIndex + roofBricks >= totalBricks) return null;
+
               // Cycle through donation tiers
               const tierIndex = brickIndex % donations.length;
               return (
