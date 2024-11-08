@@ -36,7 +36,7 @@ export function DonationControls({ onDonate, currentAmount, goalAmount }: Donati
   };
 
   return (
-    <div className="w-full max-w-md bg-white rounded-xl shadow-lg p-6">
+    <div id="button-box" className="w-full max-w-md bg-white rounded-xl shadow-lg p-6">
       <div className="mb-6">
         <div className="flex justify-between text-sm text-[#4e665d] mb-2">
           <span>${currentAmount.toLocaleString()}</span>
@@ -55,11 +55,9 @@ export function DonationControls({ onDonate, currentAmount, goalAmount }: Donati
           <button
             key={amount}
             onClick={() => onDonate(amount)}
-            className="bg-red-700 text-white font-bold py-2 px-4 rounded shadow-md hover:brightness-110 transition-all"
-            style={{
-              backgroundImage: 'linear-gradient(rgba(0,0,0,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.1) 1px, transparent 1px)',
-              backgroundSize: '40px 20px'
-            }}
+            className="px-4 py-2 bg-[#4e665d] hover:bg-[#3d514a]
+                   text-white font-semibold rounded-lg transition-colors
+                   disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={currentAmount >= goalAmount}
           >
             ${amount.toLocaleString()}

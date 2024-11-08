@@ -1,5 +1,4 @@
 import React from 'react';
-import { Cross } from 'lucide-react';
 
 interface DonationHouseProps {
   currentAmount: number;
@@ -10,15 +9,10 @@ export function DonationHouse({ currentAmount, goalAmount }: DonationHouseProps)
   const progress = (currentAmount / goalAmount) * 100;
 
   return (
-    <div className="relative w-80 h-96">
-      {/* Cross */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-8 text-[#4e665d]">
-        <Cross size={32} strokeWidth={3} />
-      </div>
-
+    <div className="relative w-full max-w-md mx-auto h-[448px]">
       {/* Church SVG */}
       <div className="absolute inset-0 flex items-center justify-center">
-        <svg width="280" height="280" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="448" height="448" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <pattern id="gridPattern" width="20" height="20" patternUnits="userSpaceOnUse">
               <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(0,0,0,0.1)" strokeWidth="1"/>
@@ -30,28 +24,31 @@ export function DonationHouse({ currentAmount, goalAmount }: DonationHouseProps)
 
           {/* Progress fill with grid */}
           <g clipPath="url(#churchShape)">
-            <rect
-              x="0"
-              y="256"
-              width="256"
-              height="256"
-              fill="#b8d8df"
-              style={{
-                transform: `translateY(${-(progress)}%)`,
-                transition: 'transform 1s ease-in-out'
-              }}
-            />
-            <rect
-              x="0"
-              y="256"
-              width="256"
-              height="256"
-              fill="url(#gridPattern)"
-              style={{
-                transform: `translateY(${-(progress)}%)`,
-                transition: 'transform 1s ease-in-out'
-              }}
-            />
+            <g style={{
+              transform: `scaleY(${progress / 100})`,
+              transformOrigin: 'bottom'
+            }}>
+              <rect
+                x="0"
+                y="58"
+                width="256"
+                height="182"
+                fill="#b8d8df"
+                style={{
+                  transition: 'transform 1s ease-in-out'
+                }}
+              />
+              <rect
+                x="0"
+                y="58"
+                width="256"
+                height="182"
+                fill="url(#gridPattern)"
+                style={{
+                  transition: 'transform 1s ease-in-out'
+                }}
+              />
+            </g>
           </g>
 
           {/* Door */}
