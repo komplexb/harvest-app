@@ -10,6 +10,13 @@ export function App() {
 
   const handleDonate = (amount: number) => {
     setTotalDonations(prev => Math.min(prev + amount, GOAL_AMOUNT));
+    // drop bricks from the top of the page
+
+    // gracefully fail if vibrate is not supported
+    if (!navigator.vibrate) {
+      return;
+    }
+    navigator.vibrate([200, 100, 200]);
   };
 
   return (
@@ -25,11 +32,11 @@ export function App() {
         </div>
 
         <div className="flex flex-col items-center gap-8">
-          <DonationHouse 
-            currentAmount={totalDonations} 
+          <DonationHouse
+            currentAmount={totalDonations}
             goalAmount={GOAL_AMOUNT}
           />
-          <DonationControls 
+          <DonationControls
             onDonate={handleDonate}
             currentAmount={totalDonations}
             goalAmount={GOAL_AMOUNT}
