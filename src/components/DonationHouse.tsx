@@ -29,7 +29,7 @@ export function DonationHouse({ currentAmount, goalAmount }: DonationHouseProps)
               y="0"
               width="256"
               height="256"
-              fill="#b8d8df"
+              fill="#F4A33A"
               style={{
                 transformOrigin: 'bottom',
                 transform: `scaleY(${progress / 100})`,
@@ -53,7 +53,7 @@ export function DonationHouse({ currentAmount, goalAmount }: DonationHouseProps)
           {/* Door */}
           <path
             d="M154.1,239.4h-52.2v-40.1c0-14.4,11.7-26.1,26.1-26.1c14.4,0,26.1,11.7,26.1,26.1V239.4z"
-            fill="#f7c885"
+            fill="#ffffff"
             fillOpacity={progress > 66 ? 1 : 0}
             style={{
               transition: 'fill-opacity 1s ease-in-out'
