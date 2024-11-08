@@ -37,7 +37,7 @@ export function DonationControls({ onDonate, currentAmount, goalAmount }: Donati
 
   return (
     <div id="button-box" className="w-full max-w-md bg-white rounded-xl shadow-lg p-6">
-      <div className="mb-6">
+      {/* <div id="progress-bar" className="mb-6">
         <div className="flex justify-between text-sm text-[#4e665d] mb-2">
           <span>${currentAmount.toLocaleString()}</span>
           <span>${goalAmount.toLocaleString()}</span>
@@ -48,7 +48,7 @@ export function DonationControls({ onDonate, currentAmount, goalAmount }: Donati
             style={{ width: `${progress}%` }}
           />
         </div>
-      </div>
+      </div> */}
 
       <div className="grid grid-cols-2 gap-3 mb-4">
         {donationAmounts.map(amount => (
