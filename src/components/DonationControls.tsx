@@ -50,6 +50,10 @@ export function DonationControls({ onDonate, currentAmount, goalAmount }: Donati
         </div>
       </div> */}
 
+      <p className="text-lg text-[#4e665d] mb-4 text-center">
+        How'd you like to pledge?
+      </p>
+
       <div className="grid grid-cols-2 gap-3 mb-4">
         {donationAmounts.map(amount => (
           <button
@@ -86,7 +90,7 @@ export function DonationControls({ onDonate, currentAmount, goalAmount }: Donati
                    text-white font-semibold rounded-lg transition-colors
                    disabled:opacity-50 disabled:cursor-not-allowed"
         >
-          Donate
+          Pledge
         </button>
       </div>
 

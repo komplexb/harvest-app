@@ -2,12 +2,24 @@
 @tailwind components;
 @tailwind utilities;
 
-.brick-bg {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px,
-      transparent 1px),
-    linear-gradient(90deg,
-      rgba(0, 0, 0, 0.1) 1px,
-      transparent 1px);
-  background-size: 40px 20px;
-  background-color: #9b2c2c;
+@keyframes fall {
+  0% {
+    transform: translateY(-48px) rotate(var(--rotation-start));
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(var(--rotation-end));
+    opacity: 0.2;
+  }
+}
+
+.animate-fall {
+  animation: fall 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.brick {
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1;
 }
