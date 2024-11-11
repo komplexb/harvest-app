@@ -5,9 +5,10 @@ interface DonationControlsProps {
   totalBricks: number;
 }
 
-export const MAX_BRICKS = 400;
+const MAX_FAMILY = 8;
+export const MAX_BRICKS = 550;
 export function DonationControls({ onFamilySelect, totalBricks }: DonationControlsProps) {
-  const familySizes = Array.from({ length: 10 }, (_, i) => i + 1);
+  const familySizes = Array.from({ length: MAX_FAMILY }, (_, i) => i + 1);
 
   return (
     <div id="button-box" className="w-full max-w-md bg-white rounded-xl shadow-lg p-6 mb-8">
@@ -15,7 +16,7 @@ export function DonationControls({ onFamilySelect, totalBricks }: DonationContro
         Select your family size
       </p>
 
-      <div className="grid grid-cols-5 gap-4 mb-4">
+      <div className="grid grid-cols-4 gap-4 mb-4">
         {familySizes.map(size => (
           <button
             key={size}

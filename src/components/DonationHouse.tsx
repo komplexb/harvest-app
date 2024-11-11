@@ -63,13 +63,13 @@ export function DonationHouse({ bricks }: DonationHouseProps) {
       </div>
 
       {/* Total bricks counter */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+      {/* <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
         <div className="bg-white bg-opacity-90 px-6 py-3 rounded-full shadow-lg">
           <span className="font-bold text-xl text-[#4e665d]">
             {bricks.length} Bricks
           </span>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

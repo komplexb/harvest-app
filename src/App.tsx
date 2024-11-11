@@ -14,8 +14,7 @@ export function App() {
   const [nextBrickId, setNextBrickId] = useState(0);
 
   const COLUMNS = 20;
-  const FULL_CHURCH = 590;
-  const INITIAL_BRICKS = 300; // Reduced from 400 to 200
+  const INITIAL_BRICKS = 0;
 
   const getRandomVariant = () => Math.floor(Math.random() * 4);
 
@@ -47,13 +46,16 @@ export function App() {
   }, []);
 
   const handleFamilySelect = (familySize: number) => {
-    if (bricks.length + familySize > MAX_BRICKS) return;
+    // Convert family size to actual bricks (multiply by 1.67 and round up)
+    const bricksToAdd = Math.ceil(familySize * 1.67);
+    if (bricks.length + bricksToAdd > MAX_BRICKS) return;
+    console.log({bricks: bricks.length})
 
     const newBricks: BrickState[] = [];
     const currentBricks = [...bricks];
 
     // Add new bricks with a slight delay between each
-    for (let i = 0; i < familySize; i++) {
+    for (let i = 0; i < bricksToAdd; i++) {
       const columns = Array.from({ length: COLUMNS }, (_, i) => i);
       const lowestColumn = columns.reduce((lowest, current) => {
         const heightLowest = findNextPosition(lowest, [...currentBricks, ...newBricks]);
@@ -70,11 +72,15 @@ export function App() {
     }
 
     setBricks(prev => [...prev, ...newBricks]);
-    setNextBrickId(prev => prev + familySize);
+    setNextBrickId(prev => prev + bricksToAdd);
 
+    // vibrate on donation
     if (navigator.vibrate) {
       navigator.vibrate([200, 100, 200]);
     }
+    // play a brick sound on donation
+    // const audio = new Audio('/brick-sound.mp3');
+    // audio.play();
   };
 
   return (
