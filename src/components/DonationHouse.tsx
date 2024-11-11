@@ -1,16 +1,22 @@
 import React from 'react';
 
 interface DonationHouseProps {
-  bricks: { id: number; x: number; y: number }[];
+  bricks: { id: number; x: number; y: number; variant: number }[];
 }
 
+const BRICK_COLORS = [
+  '#c65d45', // red-orange
+  '#b8462c', // darker red
+  '#d17f6b', // light terracotta
+  '#a64b38', // deep brick red
+];
+
 export function DonationHouse({ bricks }: DonationHouseProps) {
-  const BRICK_WIDTH = 16; // pixels
-  const BRICK_HEIGHT = 8; // pixels
+  const BRICK_WIDTH = 16;
+  const BRICK_HEIGHT = 8;
 
   return (
     <div className="relative w-full max-w-[600px] mx-auto h-[600px]">
-      {/* Church outline */}
       <div className="flex items-center justify-center">
         <svg width="600" height="600" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
@@ -39,12 +45,15 @@ export function DonationHouse({ bricks }: DonationHouseProps) {
               <rect
                 key={brick.id}
                 className="brick-fall"
-                x={brick.x * BRICK_WIDTH + 50} // Add offset to center bricks
+                x={brick.x * BRICK_WIDTH + 25} // Reduced offset from 50 to 30
                 y={256 - ((brick.y + 1) * BRICK_HEIGHT)}
-                width={BRICK_WIDTH - 1} // Subtract 1 for gap
-                height={BRICK_HEIGHT - 1} // Subtract 1 for gap
-                fill="#bc4b51"
-                stroke="#d4c5b9"
+                width={BRICK_WIDTH - 1}
+                height={BRICK_HEIGHT - 1}
+                fill={BRICK_COLORS[brick.variant]}
+                stroke="#ffffff"
+                strokeWidth="0.5"
+                rx="1"
+                ry="1"
               />
             ))}
           </g>
@@ -52,7 +61,7 @@ export function DonationHouse({ bricks }: DonationHouseProps) {
       </div>
 
       {/* Total bricks counter */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 pointer-events-none">
         <div className="bg-white bg-opacity-90 px-6 py-3 rounded-full shadow-lg">
           <span className="font-bold text-xl text-[#4e665d]">
             {bricks.length} Bricks

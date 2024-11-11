@@ -6,28 +6,28 @@ interface BrickState {
   id: number;
   x: number;
   y: number;
+  variant: number;
 }
 
 export function App() {
   const [bricks, setBricks] = useState<BrickState[]>([]);
   const [nextBrickId, setNextBrickId] = useState(0);
 
-  const COLUMNS = 20; // More columns for smaller bricks
+  const COLUMNS = 20;
   const MAX_BRICKS = 400;
-  const INITIAL_BRICKS = 350;
+  const INITIAL_BRICKS = 300; // Reduced from 400 to 200
 
-  // Find the next available position for a brick in tetris style
+  const getRandomVariant = () => Math.floor(Math.random() * 4);
+
   const findNextPosition = (column: number, currentBricks: BrickState[]): number => {
     const bricksInColumn = currentBricks.filter(b => b.x === column);
     const maxY = Math.max(...bricksInColumn.map(b => b.y), -1);
     return maxY + 1;
   };
 
-  // Initialize with 100 bricks
   useEffect(() => {
     const initialBricks: BrickState[] = [];
     for (let i = 0; i < INITIAL_BRICKS; i++) {
-      // Find the column with the lowest height
       const columns = Array.from({ length: COLUMNS }, (_, i) => i);
       const lowestColumn = columns.reduce((lowest, current) => {
         const heightLowest = findNextPosition(lowest, initialBricks);
@@ -39,6 +39,7 @@ export function App() {
         id: i,
         x: lowestColumn,
         y: findNextPosition(lowestColumn, initialBricks),
+        variant: getRandomVariant(),
       });
     }
     setBricks(initialBricks);
@@ -48,12 +49,11 @@ export function App() {
   const handleFamilySelect = (familySize: number) => {
     if (bricks.length + familySize > MAX_BRICKS) return;
 
-    // Add bricks based on family size
     const newBricks: BrickState[] = [];
     const currentBricks = [...bricks];
 
+    // Add new bricks with a slight delay between each
     for (let i = 0; i < familySize; i++) {
-      // Find the column with the lowest height
       const columns = Array.from({ length: COLUMNS }, (_, i) => i);
       const lowestColumn = columns.reduce((lowest, current) => {
         const heightLowest = findNextPosition(lowest, [...currentBricks, ...newBricks]);
@@ -65,13 +65,13 @@ export function App() {
         id: nextBrickId + i,
         x: lowestColumn,
         y: findNextPosition(lowestColumn, [...currentBricks, ...newBricks]),
+        variant: getRandomVariant(),
       });
     }
 
     setBricks(prev => [...prev, ...newBricks]);
     setNextBrickId(prev => prev + familySize);
 
-    // gracefully fail if vibrate is not supported
     if (navigator.vibrate) {
       navigator.vibrate([200, 100, 200]);
     }

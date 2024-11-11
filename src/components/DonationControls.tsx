@@ -10,19 +10,20 @@ export function DonationControls({ onFamilySelect, totalBricks }: DonationContro
   const MAX_BRICKS = 400;
 
   return (
-    <div id="button-box" className="w-full max-w-md bg-white rounded-xl shadow-lg p-6">
-      <p className="text-lg text-[#4e665d] mb-4 text-center">
+    <div id="button-box" className="w-full max-w-md bg-white rounded-xl shadow-lg p-6 mb-8">
+      <p className="text-lg text-[#4e665d] mb-4 text-center font-semibold">
         Select your family size
       </p>
 
-      <div className="grid grid-cols-5 gap-3 mb-4">
+      <div className="grid grid-cols-5 gap-4 mb-4">
         {familySizes.map(size => (
           <button
             key={size}
             onClick={() => onFamilySelect(size)}
-            className="px-4 py-2 bg-[#4e665d] hover:bg-[#3d514a]
-                   text-white font-semibold rounded-lg transition-colors
-                   disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-3 bg-[#4e665d] hover:bg-[#3d514a]
+                     text-white text-lg font-semibold rounded-lg transition-colors
+                     disabled:opacity-50 disabled:cursor-not-allowed
+                     shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             disabled={totalBricks + size > MAX_BRICKS}
           >
             {size}
