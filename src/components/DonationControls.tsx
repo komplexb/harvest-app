@@ -5,9 +5,9 @@ interface DonationControlsProps {
   totalBricks: number;
 }
 
+export const MAX_BRICKS = 400;
 export function DonationControls({ onFamilySelect, totalBricks }: DonationControlsProps) {
   const familySizes = Array.from({ length: 10 }, (_, i) => i + 1);
-  const MAX_BRICKS = 400;
 
   return (
     <div id="button-box" className="w-full max-w-md bg-white rounded-xl shadow-lg p-6 mb-8">

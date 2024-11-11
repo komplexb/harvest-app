@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { DonationHouse } from './components/DonationHouse';
-import { DonationControls } from './components/DonationControls';
+import { DonationControls, MAX_BRICKS } from './components/DonationControls';
 
 interface BrickState {
   id: number;
@@ -14,8 +14,8 @@ export function App() {
   const [nextBrickId, setNextBrickId] = useState(0);
 
   const COLUMNS = 20;
-  const MAX_BRICKS = 400;
-  const INITIAL_BRICKS = 400; // Reduced from 400 to 200
+  const FULL_CHURCH = 590;
+  const INITIAL_BRICKS = 300; // Reduced from 400 to 200
 
   const getRandomVariant = () => Math.floor(Math.random() * 4);
 
