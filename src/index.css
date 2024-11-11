@@ -2,24 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-@keyframes fall {
-  0% {
-    transform: translateY(-48px) rotate(var(--rotation-start));
-    opacity: 1;
+@keyframes fallFromTop {
+  from {
+    transform: translateY(-256px);
   }
-  100% {
-    transform: translateY(100vh) rotate(var(--rotation-end));
-    opacity: 0.2;
+  to {
+    transform: translateY(0);
   }
 }
 
-.animate-fall {
-  animation: fall 4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-
-.brick {
-  background-size: cover;
-  background-repeat: no-repeat;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  z-index: 1;
+.brick-fall {
+  animation: fallFromTop 1s ease-in-out;
+  transform-origin: center;
+  transform-box: fill-box;
 }
