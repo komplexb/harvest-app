@@ -14,6 +14,8 @@ const BRICK_COLORS = [
 export function DonationHouse({ bricks }: DonationHouseProps) {
   const BRICK_WIDTH = 16;
   const BRICK_HEIGHT = 8;
+  const SVG_WIDTH = 256;
+  const BRICK_OFFSET = (SVG_WIDTH - (BRICK_WIDTH * 15)) / 2; // Center 15 bricks width
 
   return (
     <div className="relative w-full max-w-[600px] mx-auto h-[600px]">
@@ -45,8 +47,8 @@ export function DonationHouse({ bricks }: DonationHouseProps) {
               <rect
                 key={brick.id}
                 className="brick-fall"
-                x={brick.x * BRICK_WIDTH + 25} // Reduced offset from 50 to 30
-                y={256 - ((brick.y + 1) * BRICK_HEIGHT)}
+                x={(brick.x % 15) * BRICK_WIDTH + BRICK_OFFSET}
+                y={246 - ((brick.y + 1) * BRICK_HEIGHT)}
                 width={BRICK_WIDTH - 1}
                 height={BRICK_HEIGHT - 1}
                 fill={BRICK_COLORS[brick.variant]}

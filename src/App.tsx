@@ -15,7 +15,7 @@ export function App() {
 
   const COLUMNS = 20;
   const MAX_BRICKS = 400;
-  const INITIAL_BRICKS = 300; // Reduced from 400 to 200
+  const INITIAL_BRICKS = 400; // Reduced from 400 to 200
 
   const getRandomVariant = () => Math.floor(Math.random() * 4);
 
