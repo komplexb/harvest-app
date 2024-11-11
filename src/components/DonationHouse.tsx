@@ -59,6 +59,15 @@ export function DonationHouse({ bricks }: DonationHouseProps) {
               />
             ))}
           </g>
+
+          {/* Church door */}
+          <path
+            id="door"
+            fill="#F4A33A"
+            stroke="#4e665d"
+            strokeWidth={2}
+            d="M154.1,239.4h-52.2v-40.1c0-14.4,11.7-26.1,26.1-26.1c14.4,0,26.1,11.7,26.1,26.1V239.4z"
+          />
         </svg>
       </div>
 
