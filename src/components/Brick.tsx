@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import brickImage from '../images/red-brick-small.jpeg';
 
 interface BrickProps {
   onAnimationEnd: () => void;
+  variant: number;
 }
 
-export function Brick({ onAnimationEnd }: BrickProps) {
+const BRICK_VARIANTS = [
+  'bg-[#c65d45]', // red-orange
+  'bg-[#b8462c]', // darker red
+  'bg-[#d17f6b]', // light terracotta
+  'bg-[#a64b38]', // deep brick red
+];
+
+export function Brick({ onAnimationEnd, variant }: BrickProps) {
   const [position, setPosition] = useState(() => ({
     left: Math.random() * (window.innerWidth - 120), // 120px is brick width
     initialRotation: Math.random() * 360,
@@ -27,10 +34,9 @@ export function Brick({ onAnimationEnd }: BrickProps) {
 
   return (
     <div
-      className="brick absolute w-[120px] h-[48px] rounded-sm animate-fall bg-cover bg-center"
+      className={`brick absolute w-[120px] h-[48px] rounded-lg ${BRICK_VARIANTS[variant]} animate-fall bg-cover bg-center`}
       style={{
         left: position.left + 'px',
-        backgroundImage: `url(${brickImage})`,
         '--rotation-start': `${position.initialRotation}deg`,
         '--rotation-end': `${position.initialRotation + (position.rotationDirection * 720)}deg`,
       } as React.CSSProperties}
