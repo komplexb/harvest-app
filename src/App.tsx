@@ -49,7 +49,6 @@ export function App() {
     // Convert family size to actual bricks (multiply by 1.67 and round up)
     const bricksToAdd = Math.ceil(familySize * 1.67);
     if (bricks.length + bricksToAdd > MAX_BRICKS) return;
-    console.log({bricks: bricks.length})
 
     const newBricks: BrickState[] = [];
     const currentBricks = [...bricks];
