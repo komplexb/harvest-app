@@ -71,6 +71,16 @@ export function DonationHouse({ bricks, scale = 1 }: DonationHouseProps) {
             strokeWidth={2}
             d="M154.1,239.4h-52.2v-40.1c0-14.4,11.7-26.1,26.1-26.1c14.4,0,26.1,11.7,26.1,26.1V239.4z"
           />
+
+          {/* Door divider */}
+          <line
+            x1="128"
+            y1="173.2"
+            x2="128"
+            y2="239.4"
+            stroke="#4e665d"
+            strokeWidth={2}
+          />
         </svg>
       </div>
 
