@@ -19,12 +19,11 @@ export function DonationHouse({ bricks, scale = 1 }: DonationHouseProps) {
   const BRICK_OFFSET = (SVG_WIDTH - (BRICK_WIDTH * 15)) / 2; // Center 15 bricks width
 
   const scaledWidth = 600 * scale;
-  const scaledHeight = 600 * scale;
 
   return (
-    <div className="relative w-full mx-auto" style={{ maxWidth: `${scaledWidth}px`, height: `${scaledHeight}px` }}>
-      <div className="flex items-center justify-center">
-        <svg width={scaledWidth} height={scaledHeight} viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div className="relative w-full mx-auto aspect-square max-w-[600px]" style={{ maxWidth: `${scaledWidth}px` }}>
+      <div className="flex items-center justify-center w-full h-full">
+        <svg width="100%" height="100%" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
           <defs>
             <clipPath id="churchMask">
               <path d="M227.2,138.8l-92.7-83.6V43.9h14.2c3.6,0,6.6-2.9,6.6-6.6c0-3.6-2.9-6.6-6.6-6.6h-14.2V16.6 c0-3.6-2.9-6.6-6.6-6.6c-3.6,0-6.6,2.9-6.6,6.6v14.2h-14.2c-3.6,0-6.6,2.9-6.6,6.6c0,3.6,2.9,6.6,6.6,6.6h14.2v11.3l-92.7,83.6 c-2.7,2.4-2.9,6.6-0.5,9.3c1.2,1.4,3,2.2,4.9,2.2h17.4v89.2c0,3.6,2.9,6.6,6.6,6.6h141.8c3.6,0,6.6-2.9,6.6-6.6v-89.2h17.4 c3.6,0,6.6-2.9,6.6-6.6C229.4,141.8,228.6,140.1,227.2,138.8L227.2,138.8z" />
