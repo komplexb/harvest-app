@@ -99,7 +99,7 @@ export function HomePage() {
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-[#4e665d] mb-4">
-            A Home for the Harvest
+            Commitment Sunday
           </h1>
           <p className="text-lg text-[#4e665d]">
             Add your family's bricks to help build our church
