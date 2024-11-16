@@ -3,6 +3,7 @@ import { DonationHouse } from './DonationHouse';
 import { DonationControls, MAX_BRICKS } from './DonationControls';
 import { db, TABLE_NAME } from '../firebase';
 import { ref, onValue } from 'firebase/database';
+import brickSound from '../assets/sounds/brick-scrape-2.wav';
 
 interface BrickState {
   id: number;
@@ -81,6 +82,13 @@ export function HomePage() {
 
     console.log(`Selected family size: ${familySize}`);
 
+    const playSound = () => {
+      const audio = new Audio(brickSound);
+      audio.volume = 1;
+      audio.play().catch(err => console.log('Error playing sound:', err));
+    }
+
+    playSound();
     if (navigator.vibrate) {
       navigator.vibrate([200, 100, 200]);
     }
