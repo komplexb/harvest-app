@@ -1,5 +1,6 @@
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
+import { encodeEmail } from './utils';
 
 // Initialize Firebase Admin
 admin.initializeApp({
@@ -13,6 +14,17 @@ interface FamilyData {
   familySize: number;
 }
 
+function parseFormData(data: string): { email: string; familySize: number } {
+  // Parse data in format "Email:email@example.com, Family size:2"
+  const emailMatch = data.match(/Email:([^,]+)/);
+  const familySizeMatch = data.match(/Family size:(\d+)/);
+
+  return {
+    email: emailMatch ? emailMatch[1].trim() : '',
+    familySize: familySizeMatch ? parseInt(familySizeMatch[1], 10) : 0
+  };
+}
+
 export const jotformWebhook = functions.https.onRequest(async (request, response) => {
   // Only allow POST requests
   if (request.method !== 'POST') {
@@ -22,18 +34,12 @@ export const jotformWebhook = functions.https.onRequest(async (request, response
   }
 
   try {
-    // Log the raw request
-    console.log('Headers:', request.headers);
-    console.log('Raw body:', request.rawBody?.toString());
-
-    // Get the raw data as a string and parse it
+    // Get the raw data as a string
     const rawData = request.rawBody?.toString() || '';
-    const formData = new URLSearchParams(rawData);
+    console.log('Raw data:', rawData);
 
-    // Extract email and familySize from the form data
-    const email = formData.get('email') || '';
-    const familySize = parseInt(formData.get('familySize') || '0', 10);
-
+    // Parse the form data
+    const { email, familySize } = parseFormData(rawData);
     console.log('Extracted data:', { email, familySize });
 
     // Validate the data
@@ -41,7 +47,7 @@ export const jotformWebhook = functions.https.onRequest(async (request, response
       console.log('Missing required fields:', { email, familySize });
       response.status(400).json({
         error: 'Missing required fields',
-        receivedData: Object.fromEntries(formData)
+        receivedData: rawData
       });
       return;
     }
@@ -54,10 +60,10 @@ export const jotformWebhook = functions.https.onRequest(async (request, response
 
     console.log('Saving data:', data);
 
-    // Update the Realtime Database using email as the key
-    await admin.database().ref(TABLE_NAME).child(email).set(data);
+    // the set() method will create a new record if the email key doesn't exist,
+    // or update the existing record if the email key already exists in the database
+    await admin.database().ref(TABLE_NAME).child(encodeEmail(email)).set(data);
 
-    console.log('Data saved successfully');
     response.status(200).send('Data updated successfully');
   } catch (error) {
     console.error('Error processing webhook:', error);
